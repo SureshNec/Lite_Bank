@@ -1,0 +1,31 @@
+p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.body {
+  background-color: rgb(219, 219, 233);
+  height: 100vh;
+}
+.orlCont {
+  background-color: rgb(245, 245, 251);
+}
+.logbtn:hover {
+  background-color: #f85858 !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+.maincont {
+  background-color: #ffffff !important;
+}
+
+@media (min-width: 786px) {
+  .orlCont {
+    height: 70vh !important;
+  }
+}
+/* @media (max-width: 785px) {
+  .orlCont {
+    height: auto !important;
+  }
+} */
