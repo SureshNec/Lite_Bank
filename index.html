@@ -13,7 +13,7 @@
       crossorigin="anonymous" />
   </head>
   <body class="body d-flex flex-column justify-content-center">
-    <div class="container rounded-4 shadow-lg d-flex flex-column justify-content-between orlCont">
+    <div class="container-lg rounded-4 shadow-lg d-flex flex-column orlCont">
       <!--NavBar-->
       <nav class="navbar navbar-expand-lg mt-2">
         <div class="container-fluid">
@@ -36,23 +36,125 @@
       </nav>
 
       <!--Main-->
-      <main class="container h-100 p-4 d-flex flex-column justify-content-center">
-        <div class="container rounded-4 p-5">
+      <main class="container-lg p-4">
+        <div class="container-lg rounded-4 p-2 p-xl-5">
           <div class="row mb-4 p-4 rounded-4 maincont">
-            <div class="col gap-4 p-0 m-0 d-flex flex-row justify-content-center">
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
+            <!--Current Balance-->
+            <div class="col gap-4 p-0 m-0 d-flex flex-row justify-content-between align-items-center">
+              <div class=" ">
+                <h4>Current Balance</h4>
+                <span class="date text-body-tertiary">05/03/2037</span>
+              </div>
+
+              <p class="display-6 balance__value"><strong>3865$</strong></p>
             </div>
           </div>
-          <div class="row gap-4 d-flex flex-row">
-            <div class="col-4 p-4 gap-4 d-flex flex-column justify-content-center rounded-4 maincont">
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
+
+          <!--Cash Flow-->
+          <div class="row gap-4 d-flex flex-column flex-md-row">
+            <div class="col p-4 rounded-4 maincont">
+              <div class="mb-4 d-flex flex-row justify-content-between align-items-center">
+                <div class="d-flex flex-row gap-5 justify-content-between">
+                  <div class="d-flex flex-column flex-sm-row gap-2">
+                    <p class="text-body-tertiary">IN</p>
+
+                    <p class="cur_dep summary__value summary__value--in fw-bold">0000$</p>
+                  </div>
+                  <div class="d-flex flex-column flex-sm-row gap-2">
+                    <p class="text-body-tertiary">OUT</p>
+
+                    <p class="cur_wid summary__value summary__value--out fw-bold">0000$</p>
+                  </div>
+                </div>
+
+                <button class="btn_sort text-body-tertiary">&downarrow; SORT</button>
+              </div>
+              <div class="d-flex flex-column cash_flow overflow-auto">
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+              </div>
             </div>
-            <div class="col p-4 ms-2 rounded-4 maincont">
-              <p class="bg-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis dolor</p>
+
+            <!--Operations-->
+            <div class="col col-md-4 p-4 gap-4 d-flex flex-column justify-content-center align-items-center rounded-4 maincont">
+              <!--Money Transfer-->
+              <div class="money-trans p-4 rounded-2 w-100 d-flex flex-column">
+                <h5 class="row">Money Transfer 💸</h5>
+                <form class="row gap-2 d-flex flex-column flex-sm-row flex-md-column flex-lg-row">
+                  <input type="text" class="col form-control form_transfer input_to" placeholder="To" />
+                  <input type="number" class="col form-control form_transfer input_to_amt" placeholder="Amount" />
+                  <button class="col col-lg-2 btn form_btn btn_transfer">→</button>
+                </form>
+              </div>
+
+              <!--Request Loan-->
+              <div class="loan_req p-4 rounded-2 w-100 d-flex flex-column">
+                <h5 class="row">Request Loan 💰</h5>
+                <form class="row gap-2 d-flex flex-column flex-sm-row flex-md-column flex-lg-row">
+                  <input type="number" class="col form-control form_loan input_loan_amt" placeholder="Amount" />
+                  <button class="col col-lg-2 btn form_btn btn_loan">→</button>
+                </form>
+              </div>
+
+              <!--Close Account-->
+              <div class="close_acc p-4 rounded-2 w-100 d-flex flex-column">
+                <h5 class="row">Close Account 🧾</h5>
+                <form class="row gap-2 d-flex flex-column flex-sm-row flex-md-column flex-lg-row">
+                  <input type="text" class="col form-control form_close input_user" placeholder="User" />
+                  <input type="password" class="col form-control form_close input_pin" placeholder="PIN" />
+                  <button class="col col-lg-2 btn form_btn btn_closeAct">→</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
