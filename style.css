@@ -25,16 +25,24 @@ p {
 }
 
 .body {
-  background-color: rgb(219, 219, 233);
+  /* background-image: linear-gradient(to bottom right, #9edae9, #e5d7ff); */
+  background-color: #dbdbe9;
 }
 .orlCont {
   background-color: rgb(245, 245, 251);
 }
-.logbtn:hover {
+.login__btn:hover {
   background-image: linear-gradient(to bottom right, #ff8787, #ff6767) !important;
   color: white !important;
   font-weight: 600 !important;
 }
+
+/*App */
+.visibility {
+  transition: ease-in 1s;
+  visibility: hidden;
+}
+
 .maincont {
   background-color: #ffffff !important;
 }
@@ -58,12 +66,12 @@ input::placeholder {
 .cur_wid {
   color: #ff6767;
 }
-.btn_sort {
+.btn--sort {
   border: none;
   background-color: #ffffff;
   padding: 0;
 }
-.btn_sort:hover {
+.btn--sort:hover {
   color: darkgoldenrod !important;
 }
 .btn_sort:active {
@@ -79,6 +87,7 @@ input::placeholder {
   transition: ease-in 0.3s;
   opacity: 1;
 }
+
 .money-trans {
   background-image: linear-gradient(to bottom right, #ceb4ff, #c0a0fc);
 }
