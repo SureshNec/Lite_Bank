@@ -31,18 +31,25 @@ p {
 .orlCont {
   background-color: rgb(245, 245, 251);
 }
-.login__btn:hover {
+
+.login__btn:hover,
+.logout__btn:hover {
   background-image: linear-gradient(to bottom right, #ff8787, #ff6767) !important;
   color: white !important;
   font-weight: 600 !important;
 }
+.hint:hover {
+  cursor: help;
+}
 
 /*App */
 .visibility {
-  transition: ease-in 1s;
-  visibility: hidden;
+  /* transition: ease-in 1s; */
+  visibility: hidden !important;
 }
-
+.display {
+  display: none !important;
+}
 .maincont {
   background-color: #ffffff !important;
 }

@@ -58,21 +58,27 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
+const loginForm = document.querySelector(".loginForm");
+const loginToogle = document.querySelector(".loginToogle");
+const btnlogOut = document.querySelector(".logout__btn");
 /////////////////////////////////////////////////
 
 //Display Movements in HTML
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = "";
-  movements.forEach((mov, i) => {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? "deposit" : "Withdrawl";
     const color = mov > 0 ? "success" : "danger";
 
     const html = `<div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
-    <p class="text-white bg-${color} bg-gradient bg-opacity-75 py-1 px-4 rounded-pill ">
-    ${i + 1} ${type}
+    <p class="text-white bg-${color} bg-gradient bg-opacity-75  px-4 rounded-pill ">
+     ${type}
     </p>
     <!-- <p class="movements__date text-body-tertiary">3 days ago</p> -->
-    <p class="text-secondary fw-semibold"> ${mov} $</p>
+    <p class="text-secondary fw-semibold "> ${mov} $</p>
   </div>`;
 
     containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -96,8 +102,16 @@ const calcDisplaySummary = (acnt) => {
     .map((dep) => (dep * acnt.interestRate) / 100)
     .filter((int) => int > 1)
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumInterest.textContent = `${interst} $`;
+  labelSumInterest.textContent = `${Math.round(interst)} $`;
 };
+
+//Sort
+let sorted = false;
+btnSort.addEventListener("click", (e) => {
+  e.preventDefault();
+  displayMovements(currentAccnt.movements, !sorted);
+  sorted = !sorted;
+});
 
 //Create Usernames
 const createUsernames = (accts) => {
@@ -134,18 +148,36 @@ btnLogin.addEventListener("click", (e) => {
   currentAccnt = accounts.find((user) => user.username === inputLoginUsername.value);
 
   if (currentAccnt?.pin === Number(inputLoginPin.value)) {
+    //removeUI
+    btnlogOut.classList.remove("display");
+    loginForm.classList.add("display", "visibility");
+    loginToogle.classList.add("display");
     //Display UI
     labelWelcome.textContent = `Welcome back, ${currentAccnt.owner.split(" ")[0]}`;
     containerApp.classList.remove("visibility");
+
     //Clear Input Fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputClosePin.blur();
 
     //Update UI
     updateUI(currentAccnt);
+
+    console.log(accounts);
   } else {
     labelWelcome.textContent = `Invalid Credentials`;
   }
+});
+
+// LogOut feature
+btnlogOut.addEventListener("click", (e) => {
+  e.preventDefault();
+  //Add UI
+  labelWelcome.textContent = `Log in to get started`;
+  containerApp.classList.add("visibility");
+  btnlogOut.classList.add("display");
+  loginForm.classList.remove("display", "visibility");
+  loginToogle.classList.remove("display");
 });
 
 //Transfer Money
@@ -164,6 +196,49 @@ btnTransfer.addEventListener("click", (e) => {
     receiverAccnt.movements.push(amount);
     //Update UI
     updateUI(currentAccnt);
+  }
+});
+
+//Loan Request
+btnLoan.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccnt.movements.some((momts) => momts >= amount * 0.1)) {
+    //Clear Input Fields
+    inputLoanAmount.value = "";
+    inputLoanAmount.blur();
+
+    //Add Loan
+    currentAccnt.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccnt);
+  }
+});
+
+//Close Account
+btnClose.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (inputCloseUsername.value === currentAccnt.username && Number(inputClosePin.value) === currentAccnt.pin) {
+    const index = accounts.findIndex((accnt) => accnt.username === currentAccnt.username);
+
+    //Clear Input Fields
+    inputCloseUsername.value = inputClosePin.value = "";
+    inputClosePin.blur();
+
+    //delete user
+    accounts.splice(index, 1); //1 indicates 1 user
+
+    //Display UI
+    labelWelcome.textContent = `Log in to get started`;
+    containerApp.classList.add("visibility");
+    btnlogOut.classList.add("display");
+    loginForm.classList.remove("display", "visibility");
+    loginToogle.classList.remove("display");
+
+    console.log(accounts);
   }
 });
 

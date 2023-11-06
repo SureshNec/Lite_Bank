@@ -26,35 +26,38 @@
           <a href="#" class="navbar-brand"><strong>Lite Bank</strong></a>
           <p class="navbar-text welcome">Log in to get started</p>
 
-          <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+          <button class="loginToogle navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse my-4" id="mynavbar">
+          <div class="loginForm collapse navbar-collapse my-4" id="mynavbar">
             <ul class="navbar-nav me-auto"></ul>
-            <form class="d-flex">
+            <form class="d-flex align-items-center">
+              <span class="hint" title="Use Console Log">💡</span>
               <input class="form-control rounded-pill me-2 login__input--user" type="text" placeholder="Username" />
               <input class="form-control rounded-pill me-2 login__input--pin" type="password" placeholder="PIN" />
               <button class="btn text-secondary rounded-pill login__btn" type="button">Login</button>
             </form>
           </div>
+          <button class="btn text-secondary rounded-pill logout__btn display" type="button">Logout</button>
         </div>
       </nav>
 
       <!--Main-->
       <main class="container-lg p-4 app visibility">
         <div class="container-lg rounded-4 p-2 p-xl-5">
+          <!--Timer-->
           <div class="row px-4">
-            <div class="col d-flex flex-row justify-content-end">
+            <!-- <div class="col d-flex flex-row justify-content-end">
               <p class="logout-timer mb-2 text-body-tertiary fst-italic">You will be logged out in <span class="timer">05:00</span></p>
-            </div>
+            </div> -->
           </div>
           <div class="row mb-4 p-4 rounded-4 maincont">
             <!--Current Balance-->
             <div class="col gap-4 p-0 m-0 d-flex flex-row justify-content-between align-items-center">
               <div class=" ">
                 <h4>Current Balance</h4>
-                <span class="date text-body-tertiary">05/03/2037</span>
+                <!-- <span class="date text-body-tertiary">05/03/2037</span> -->
               </div>
 
               <p class="display-6 balance__value fw-semibold">0000$</p>
@@ -104,6 +107,7 @@
                   <input type="number" class="col form-control form_transfer form__input--amount" placeholder="Amount" />
                   <button class="col-4 col-sm-2 col-md-6 col-lg-2 btn form_btn form__btn--transfer">→</button>
                 </form>
+                <span class="errtransfer text-danger fw-semibold"></span>
               </div>
 
               <!--Request Loan-->
@@ -113,6 +117,7 @@
                   <input type="number" class="col form-control form_loan form__input--loan-amount" placeholder="Amount" />
                   <button class="col-4 col-sm-2 col-md-6 col-lg-2 btn form_btn form__btn--loan">→</button>
                 </form>
+                <span class="errloan text-danger fw-semibold"></span>
               </div>
 
               <!--Close Account-->
@@ -123,6 +128,7 @@
                   <input type="password" class="col form-control form_close form__input--pin" placeholder="PIN" />
                   <button class="col-4 col-sm-2 col-md-6 col-lg-2 btn form_btn form__btn--close">→</button>
                 </form>
+                <span class="errclose text-danger fw-semibold"></span>
               </div>
             </div>
           </div>
