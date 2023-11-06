@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -144,3 +145,145 @@
     <script src="./index.js"></script>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lite Bank</title>
+    <link rel="stylesheet" href="./style.css" />
+    <!--Bootstrap 5-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous" />
+    <!--Fav Icon-->
+    <link rel="icon" href="./Assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./Assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./Assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./Assets/favicon-16x16.png" />
+    <link rel="manifest" href="./Assets/site.webmanifest" />
+  </head>
+  <body class="body d-flex flex-column justify-content-center">
+    <div class="container-lg rounded-4 shadow-lg d-flex flex-column orlCont">
+      <!--NavBar-->
+      <nav class="navbar navbar-expand-lg my-2">
+        <div class="container-fluid gap-2">
+          <a href="#" class="navbar-brand"><strong>Lite Bank</strong></a>
+          <p class="navbar-text welcome">Log in to get started</p>
+
+          <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse my-4" id="mynavbar">
+            <ul class="navbar-nav me-auto"></ul>
+            <form class="d-flex">
+              <input class="form-control rounded-pill me-2 login__input--user" type="text" placeholder="Username" />
+              <input class="form-control rounded-pill me-2 login__input--pin" type="password" placeholder="PIN" />
+              <button class="btn text-secondary rounded-pill login__btn" type="button">Login</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <!--Main-->
+      <main class="container-lg p-4 app visibility">
+        <div class="container-lg rounded-4 p-2 p-xl-5">
+          <div class="row px-4">
+            <div class="col d-flex flex-row justify-content-end">
+              <p class="logout-timer mb-2 text-body-tertiary fst-italic">You will be logged out in <span class="timer">05:00</span></p>
+            </div>
+          </div>
+          <div class="row mb-4 p-4 rounded-4 maincont">
+            <!--Current Balance-->
+            <div class="col gap-4 p-0 m-0 d-flex flex-row justify-content-between align-items-center">
+              <div class=" ">
+                <h4>Current Balance</h4>
+                <span class="date text-body-tertiary">05/03/2037</span>
+              </div>
+
+              <p class="display-6 balance__value fw-semibold">0000$</p>
+            </div>
+          </div>
+
+          <!--Cash Flow-->
+          <div class="row gap-4 d-flex flex-column flex-md-row">
+            <div class="col p-4 rounded-4 maincont">
+              <div class="mb-4 d-flex flex-row justify-content-between align-items-center">
+                <div class="d-flex flex-row gap-4 justify-content-between">
+                  <div class="d-flex flex-column flex-sm-row gap-2">
+                    <p class="text-body-tertiary" title="Deposits">IN</p>
+
+                    <p class="cur_dep summary__value summary__value--in fw-semibold">0000$</p>
+                  </div>
+                  <div class="d-flex flex-column flex-sm-row gap-2">
+                    <p class="text-body-tertiary" title="withdrawals">OUT</p>
+
+                    <p class="cur_wid summary__value summary__value--out fw-semibold">0000$</p>
+                  </div>
+                  <div class="d-flex flex-column flex-sm-row gap-2">
+                    <p class="text-body-tertiary" title="Interset Rate">INT</p>
+
+                    <p class="text-warning summary__value summary__value--interest fw-semibold">0000$</p>
+                  </div>
+                </div>
+
+                <button class="btn--sort text-body-tertiary">&downarrow; SORT</button>
+              </div>
+              <div class="movements d-flex flex-column cash_flow overflow-auto">
+                <div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
+                  <p class="text-white bg-success bg-gradient bg-opacity-75 py-1 px-2 rounded-pill">Deposits</p>
+                  <p class="movements__date text-body-tertiary">3 days ago</p>
+                  <p class="text-secondary fw-semibold">500$</p>
+                </div>
+              </div>
+            </div>
+
+            <!--Operations-->
+            <div class="col col-md-4 p-4 gap-4 d-flex flex-column justify-content-center align-items-center rounded-4 maincont">
+              <!--Money Transfer-->
+              <div class="money-trans p-4 rounded-2 w-100 d-flex flex-column">
+                <h5 class="row">Money Transfer 💸</h5>
+                <form class="row gap-2 d-flex flex-column flex-sm-row flex-md-column flex-lg-row">
+                  <input type="text" class="col form-control form_transfer form__input--to" placeholder="To" />
+                  <input type="number" class="col form-control form_transfer form__input--amount" placeholder="Amount" />
+                  <button class="col-4 col-sm-2 col-md-6 col-lg-2 btn form_btn form__btn--transfer">→</button>
+                </form>
+              </div>
+
+              <!--Request Loan-->
+              <div class="loan_req p-4 rounded-2 w-100 d-flex flex-column">
+                <h5 class="row">Request Loan 💰</h5>
+                <form class="row gap-2 d-flex flex-column flex-sm-row flex-md-column flex-lg-row">
+                  <input type="number" class="col form-control form_loan form__input--loan-amount" placeholder="Amount" />
+                  <button class="col-4 col-sm-2 col-md-6 col-lg-2 btn form_btn form__btn--loan">→</button>
+                </form>
+              </div>
+
+              <!--Close Account-->
+              <div class="close_acc p-4 rounded-2 w-100 d-flex flex-column">
+                <h5 class="row">Close Account 🧾</h5>
+                <form class="row gap-2 d-flex flex-column flex-sm-row flex-md-column flex-lg-row">
+                  <input type="text" class="col form-control form_close form__input--user" placeholder="User" />
+                  <input type="password" class="col form-control form_close form__input--pin" placeholder="PIN" />
+                  <button class="col-4 col-sm-2 col-md-6 col-lg-2 btn form_btn form__btn--close">→</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!--Scripts-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
+>>>>>>> a23ef11115bdedf3637dd76422ccaabfa151a694

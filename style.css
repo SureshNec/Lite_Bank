@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
@@ -117,3 +118,117 @@ input::placeholder {
     max-height: 30vh !important;
   }
 }
+=======
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.body {
+  /* background-image: linear-gradient(to bottom right, #9edae9, #e5d7ff); */
+  background-color: #dbdbe9;
+}
+.orlCont {
+  background-color: rgb(245, 245, 251);
+}
+.login__btn:hover {
+  background-image: linear-gradient(to bottom right, #ff8787, #ff6767) !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/*App */
+.visibility {
+  transition: ease-in 1s;
+  visibility: hidden;
+}
+
+.maincont {
+  background-color: #ffffff !important;
+}
+input::placeholder {
+  font-size: 0.8rem !important;
+  font-style: italic;
+}
+/*Current Balance */
+.balance__value {
+  color: rgb(64, 185, 117);
+}
+
+/* Cash Flow*/
+.cash_flow {
+  max-height: 50vh !important;
+}
+
+.cur_dep {
+  color: rgb(64, 185, 117);
+}
+.cur_wid {
+  color: #ff6767;
+}
+.btn--sort {
+  border: none;
+  background-color: #ffffff;
+  padding: 0;
+}
+.btn--sort:hover {
+  color: darkgoldenrod !important;
+}
+.btn_sort:active {
+  color: darkgoldenrod !important;
+  transform: translateY(2px);
+}
+
+/* Operations */
+.form-control {
+  opacity: 0.7;
+}
+.form-control:hover {
+  transition: ease-in 0.3s;
+  opacity: 1;
+}
+
+.money-trans {
+  background-image: linear-gradient(to bottom right, #ceb4ff, #c0a0fc);
+}
+.loan_req {
+  background-image: linear-gradient(to bottom right, #9ee9bf, #8cf1b8);
+}
+.close_acc {
+  background-image: linear-gradient(to bottom right, #ff8787, #ff6767);
+}
+.form_btn {
+  background-color: #ffffff !important;
+}
+@media (min-width: 786px) {
+  .body {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 992px) {
+  .cash_flow {
+    max-height: 30vh !important;
+  }
+}
+>>>>>>> a23ef11115bdedf3637dd76422ccaabfa151a694
