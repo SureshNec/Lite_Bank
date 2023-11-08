@@ -2,22 +2,22 @@
 
 // Data
 const account1 = {
-  owner: "John Schwarzenegger",
+  owner: "Suresh Sanjeev",
   movements: [200.89, 450.56, -400, 3000.38, -650.15, -130.06, 70, 1300.12],
   interestRate: 1.2, // %
   pin: 1111,
   movementsDates: [
-    "2019-11-18T21:31:17.178Z",
-    "2019-12-23T07:42:02.383Z",
-    "2020-01-28T09:15:04.904Z",
-    "2020-04-01T10:17:24.185Z",
-    "2020-05-08T14:11:59.604Z",
-    "2020-07-26T17:01:17.194Z",
-    "2020-07-28T23:36:17.929Z",
-    "2020-08-01T10:51:36.790Z",
+    "2022-11-18T21:31:17.178Z",
+    "2022-12-23T07:42:02.383Z",
+    "2023-01-28T09:15:04.904Z",
+    "2023-04-01T10:17:24.185Z",
+    "2023-05-08T14:11:59.604Z",
+    "2023-07-28T23:36:17.929Z",
+    "2023-11-06T17:01:17.194Z",
+    "2023-11-07T10:51:36.790Z",
   ],
-  currency: "EUR",
-  locale: "pt-PT", // de-DE
+  currency: "INR",
+  locale: "en-US", // de-DE
 };
 
 const account2 = {
@@ -26,14 +26,14 @@ const account2 = {
   interestRate: 1.5,
   pin: 2222,
   movementsDates: [
-    "2019-11-01T13:15:33.035Z",
-    "2019-11-30T09:48:16.867Z",
-    "2019-12-25T06:04:23.907Z",
-    "2020-01-25T14:18:46.235Z",
-    "2020-02-05T16:33:06.386Z",
-    "2020-04-10T14:43:26.374Z",
-    "2020-06-25T18:49:59.371Z",
-    "2020-07-26T12:01:20.894Z",
+    "2022-11-01T13:15:33.035Z",
+    "2022-11-30T09:48:16.867Z",
+    "2022-12-25T06:04:23.907Z",
+    "2023-01-25T14:18:46.235Z",
+    "2023-02-05T16:33:06.386Z",
+    "2023-04-10T14:43:26.374Z",
+    "2023-06-25T18:49:59.371Z",
+    "2023-07-26T12:01:20.894Z",
   ],
   currency: "USD",
   locale: "en-US",
@@ -44,13 +44,37 @@ const account3 = {
   movements: [200.55, -200.78, 340.37, -300.51, -20, 50.16, 400.05, -460.18],
   interestRate: 0.7,
   pin: 3333,
+  movementsDates: [
+    "2022-11-20T07:42:02.383Z",
+    "2022-11-25T09:15:04.904Z",
+    "2022-12-12T21:31:17.178Z",
+    "2023-08-11T10:17:24.185Z",
+    "2023-05-18T14:11:59.604Z",
+    "2023-03-13T17:01:17.194Z",
+    "2023-02-28T23:36:17.929Z",
+    "2023-01-01T10:51:36.790Z",
+  ],
+  currency: "EUR",
+  locale: "pt-PT", // de-DE
 };
 
 const account4 = {
-  owner: "Suresh Sanjeev",
+  owner: "John Schwarzenegger",
   movements: [430.19, 1000.64, 700.98, 50.33, 90.77],
   interestRate: 1,
   pin: 4444,
+  movementsDates: [
+    "2022-10-30T09:48:16.867Z",
+    "2022-12-01T13:15:33.035Z",
+    "2023-09-15T06:04:23.907Z",
+    "2023-08-20T14:18:46.235Z",
+    "2023-06-03T16:33:06.386Z",
+    "2023-04-18T14:43:26.374Z",
+    "2023-04-25T18:49:59.371Z",
+    "2023-03-06T12:01:20.894Z",
+  ],
+  currency: "INR",
+  locale: "en-US",
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -87,6 +111,28 @@ const loginToogle = document.querySelector(".loginToogle");
 const btnlogOut = document.querySelector(".logout__btn");
 /////////////////////////////////////////////////
 
+//Calculating Dates
+const calcMovementDate = function (date, locale) {
+  const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcDaysPassed(new Date(), date);
+
+  if (daysPassed === 0) return "Today";
+  if (daysPassed === 1) return "Yesterday";
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+  else {
+    // const day = `${date.getDate()}`.padStart(2, 0);
+    // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    // const year = date.getFullYear();
+    return new Intl.DateTimeFormat(locale).format(date);
+  }
+};
+
+//Claculating Currency Formats
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, { style: "currency", currency: currency }).format(value);
+};
+
 //Display Movements in HTML
 const displayMovements = function (accnt, sort = false) {
   containerMovements.innerHTML = "";
@@ -94,24 +140,23 @@ const displayMovements = function (accnt, sort = false) {
   const movs = sort ? accnt.movements.slice().sort((a, b) => a - b) : accnt.movements;
 
   movs.forEach((mov, i) => {
-    const type = mov > 0 ? "deposit" : "Withdrawl";
-    const color = mov > 0 ? "success" : "danger";
-
+    //Calculating transaction dates
     const date = new Date(accnt.movementsDates[i]);
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
+    const displayDate = calcMovementDate(date, accnt.locale);
 
-    const displayDate = `${day}/${month}/${year}`;
+    //Calculating Html Content
+    const type = mov > 0 ? "Deposit" : "Withdrawl";
+    const color = mov > 0 ? "success" : "danger";
+    const formatedMov = formatCur(mov, accnt.locale, accnt.currency);
 
-    const html = `<div class="d-flex flex-lg-row justify-content-between py-3 px-3 border-bottom">
-    <div class='d-flex flex-row justify-content-between w-50'>
-    <p class="text-white bg-${color} bg-gradient bg-opacity-75  px-4 rounded-pill ">
+    const html = `<div class="d-flex flex-lg-row justify-content-between py-3 me-3 border-bottom">
+    <div class='row w-50 gap-2 gap-lg-4 text-center '>
+    <p class="col-12 col-sm  movements_type text-white bg-${color} bg-gradient bg-opacity-75  rounded-pill ">
      ${type}
     </p>
-    <p class="movements__date text-body-tertiary ">${displayDate}</p>
+    <p class="col-12 col-sm movements__date text-body-tertiary">${displayDate}</p>
     </div>
-    <p class="text-secondary fw-semibold "> ${mov.toFixed(2)} $</p>
+    <p class="text-secondary fw-semibold movements__value text-${color}"> ${formatedMov}</p>
   </div>`;
 
     containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -121,21 +166,24 @@ const displayMovements = function (accnt, sort = false) {
 //Calc Current Balance
 const calcDisplayBalance = (accnt) => {
   accnt.balance = accnt.movements.reduce((acc, curr) => acc + curr, 0);
-  labelBalance.textContent = `${accnt.balance.toFixed(2)} $`;
+
+  labelBalance.textContent = formatCur(accnt.balance, accnt.locale, accnt.currency);
 };
 
 // Calc Incomes,Outs and Interest
 const calcDisplaySummary = (acnt) => {
   const incomes = acnt.movements.filter((mov) => mov > 0).reduce((acc, cur) => acc + cur, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)} $`;
+  labelSumIn.textContent = formatCur(incomes, acnt.locale, acnt.currency);
+
   const out = acnt.movements.filter((mov) => mov < 0).reduce((acc, cur) => acc + cur, 0);
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)} $`;
+  labelSumOut.textContent = formatCur(out, acnt.locale, acnt.currency);
+
   const interst = acnt.movements
     .filter((mov) => mov > 0)
     .map((dep) => (dep * acnt.interestRate) / 100)
     .filter((int) => int > 1)
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumInterest.textContent = `${Math.round(interst).toFixed(2)} $`;
+  labelSumInterest.textContent = formatCur(interst, acnt.locale, acnt.currency);
 };
 
 //Sort
@@ -177,9 +225,9 @@ const updateUI = (accnt) => {
 let currentAccnt;
 
 //Fake Login
-// currentAccnt = account1;
-// updateUI(currentAccnt);
-// containerApp.classList.remove("visibility");
+currentAccnt = account1;
+updateUI(currentAccnt);
+containerApp.classList.remove("visibility");
 ///////////////////////////////////////////////////////////////
 
 btnLogin.addEventListener("click", (e) => {
@@ -195,14 +243,17 @@ btnLogin.addEventListener("click", (e) => {
 
     //Creating Dates
     const now = new Date();
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      weekday: "short",
+    };
+    // const locale = navigator.language;
 
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
-
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    labelDate.textContent = new Intl.DateTimeFormat(currentAccnt.locale, options).format(now);
 
     //Display UI
     labelWelcome.textContent = `Welcome back, ${currentAccnt.owner.split(" ")[0]}`;
@@ -306,4 +357,12 @@ btnClose.addEventListener("click", (e) => {
 const arr = ["a", "b", "c", "e", "d", "f"];
 const arr2 = ["suresh", "ramesh", "mukesh"];
 const arr3 = [5, 7, 9, 8, 4, 6, 8, 9, 6, 3, 1, 4];
-console.log(arr3.reverse());
+const today = new Date();
+const options = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  weekday: "long",
+};
+const disDate = new Intl.DateTimeFormat(navigator.locale, options).format(today);
+// console.log(disDate);

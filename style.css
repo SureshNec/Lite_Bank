@@ -107,6 +107,7 @@ input::placeholder {
 .form_btn {
   background-color: #ffffff !important;
 }
+
 @media (min-width: 786px) {
   .body {
     height: 100vh !important;
