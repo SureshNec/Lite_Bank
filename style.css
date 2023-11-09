@@ -48,6 +48,7 @@ p {
   visibility: hidden !important;
 }
 .display {
+  /* transition: ease-in 1s; */
   display: none !important;
 }
 .maincont {

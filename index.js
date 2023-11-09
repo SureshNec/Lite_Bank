@@ -16,8 +16,19 @@ const account1 = {
     "2023-11-06T17:01:17.194Z",
     "2023-11-07T10:51:36.790Z",
   ],
+  movementsAll: [
+    { datemov: "2022-11-18T21:31:17.178Z", amntmov: 200.89 },
+    { datemov: "2022-12-23T07:42:02.383Z", amntmov: 450.56 },
+    { datemov: "2023-01-28T09:15:04.904Z", amntmov: -400 },
+    { datemov: "2023-04-01T10:17:24.185Z", amntmov: 300.38 },
+    { datemov: "2023-05-08T14:11:59.604Z", amntmov: -650.15 },
+    { datemov: "2023-07-28T23:36:17.929Z", amntmov: -130.06 },
+    { datemov: "2023-11-06T17:01:17.194Z", amntmov: 70 },
+    { datemov: "2023-11-07T10:51:36.790Z", amntmov: 1300.12 },
+  ],
+
   currency: "INR",
-  locale: "en-US", // de-DE
+  locale: "en-IN", // de-DE
 };
 
 const account2 = {
@@ -73,8 +84,8 @@ const account4 = {
     "2023-04-25T18:49:59.371Z",
     "2023-03-06T12:01:20.894Z",
   ],
-  currency: "INR",
-  locale: "en-US",
+  currency: "CAD",
+  locale: "en-CA",
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -221,13 +232,49 @@ const updateUI = (accnt) => {
   calcDisplaySummary(accnt);
 };
 
+//Timer Logout
+const startLogoutTimer = function () {
+  //tick
+  function tick() {
+    let min = String(Math.trunc(time / 60)).padStart(2, 0);
+    let sec = String(Math.trunc(time % 60)).padStart(2, 0);
+
+    //print time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //At 0 stop timer and logout
+    if (time === 0) {
+      clearInterval(timer);
+      //Clear UI
+      currentAccnt = null;
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.classList.add("visibility");
+      btnlogOut.classList.add("display");
+      loginForm.classList.remove("display", "visibility");
+      loginToogle.classList.remove("display");
+    }
+
+    //decrease time
+    time--;
+    ///////////////////////
+  } //
+  //set time
+  let time = 300;
+
+  //call timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+};
+
 //Login feature
-let currentAccnt;
+let currentAccnt, timerID;
 
 //Fake Login
-currentAccnt = account1;
-updateUI(currentAccnt);
-containerApp.classList.remove("visibility");
+// currentAccnt = account1;
+// updateUI(currentAccnt);
+// containerApp.classList.remove("visibility");
 ///////////////////////////////////////////////////////////////
 
 btnLogin.addEventListener("click", (e) => {
@@ -263,6 +310,10 @@ btnLogin.addEventListener("click", (e) => {
     inputLoginUsername.value = inputLoginPin.value = "";
     inputClosePin.blur();
 
+    //Call Timer
+    if (timerID) clearInterval(timerID);
+    timerID = startLogoutTimer();
+
     //Update UI
     updateUI(currentAccnt);
 
@@ -275,7 +326,9 @@ btnLogin.addEventListener("click", (e) => {
 // LogOut feature
 btnlogOut.addEventListener("click", (e) => {
   e.preventDefault();
-  //Add UI
+  //Clear UI
+  currentAccnt = null;
+  clearInterval(timerID);
   labelWelcome.textContent = `Log in to get started`;
   containerApp.classList.add("visibility");
   btnlogOut.classList.add("display");
@@ -304,6 +357,10 @@ btnTransfer.addEventListener("click", (e) => {
 
     //Update UI
     updateUI(currentAccnt);
+
+    //Clear Timer
+    clearInterval(timerID);
+    timerID = startLogoutTimer();
   }
 });
 
@@ -316,15 +373,20 @@ btnLoan.addEventListener("click", (e) => {
     //Clear Input Fields
     inputLoanAmount.value = "";
     inputLoanAmount.blur();
+    setTimeout(function () {
+      //Add Loan
+      currentAccnt.movements.push(amount);
 
-    //Add Loan
-    currentAccnt.movements.push(amount);
+      //Adding dates to transcation
+      currentAccnt.movementsDates.push(new Date().toISOString());
 
-    //Adding dates to transcation
-    currentAccnt.movementsDates.push(new Date().toISOString());
+      //Update UI
+      updateUI(currentAccnt);
 
-    //Update UI
-    updateUI(currentAccnt);
+      //Clear Timer
+      clearInterval(timerID);
+      timerID = startLogoutTimer();
+    }, 2000);
   }
 });
 
@@ -356,7 +418,16 @@ btnClose.addEventListener("click", (e) => {
 /////////////////////////////////////////////////
 const arr = ["a", "b", "c", "e", "d", "f"];
 const arr2 = ["suresh", "ramesh", "mukesh"];
-const arr3 = [5, 7, 9, 8, 4, 6, 8, 9, 6, 3, 1, 4];
+const arr3 = [
+  { movDate: "2022-10-30T09:48:16.867Z", movements: 2561 },
+  { movDate: "2022-12-01T13:15:33.035Z", movements: -506 },
+  { movDate: "2023-09-15T06:04:23.907Z", movements: 851 },
+  { movDate: "2023-08-20T14:18:46.235Z", movements: -633 },
+  { movDate: "2023-06-03T16:33:06.386Z", movements: 4562 },
+  { movDate: "2023-04-18T14:43:26.374Z", movements: -200 },
+  { movDate: "2023-04-25T18:49:59.371Z", movements: 5214 },
+  { movDate: "2023-03-06T12:01:20.894Z", movements: -2000 },
+];
 const today = new Date();
 const options = {
   year: "numeric",
@@ -366,3 +437,7 @@ const options = {
 };
 const disDate = new Intl.DateTimeFormat(navigator.locale, options).format(today);
 // console.log(disDate);
+
+arr3.push({ movDate: new Date().toISOString(), movements: 4545 });
+
+// console.log(arr3[2].movements);
