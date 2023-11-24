@@ -218,11 +218,16 @@ const createUsernames = (accts) => {
 
 createUsernames(accounts);
 
-accounts.forEach((acnt) => {
-  console.log(`Username: ${acnt.username} | Password: ${acnt.pin}`);
+let table = accounts.map((act) => {
+  return { UserName: act.username, Pin: act.pin };
 });
+console.table(table);
+// console.table(accounts);
+// accounts.forEach((acnt) => {
+//   console.log(`Username: ${acnt.username} | Password: ${acnt.pin}`);
+// });
 
-//Updating User Interface
+//Updating User Interface:
 const updateUI = (accnt) => {
   //Display Movements
   displayMovements(accnt);
@@ -230,6 +235,8 @@ const updateUI = (accnt) => {
   calcDisplayBalance(accnt);
   //Display Summary
   calcDisplaySummary(accnt);
+
+  console.table(accounts);
 };
 
 //Timer Logout
